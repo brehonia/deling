@@ -189,7 +189,9 @@ void FsDialog::generatePreview()
 		int index;
 		if((index = FF8Image::findFirstTim(data)) != -1)
 		{
-			preview->imagePreview(QPixmap::fromImage(TimFile(data.mid(index)).image()), fileName);
+			TimFile tim(data.mid(index));
+			tim.setCurrentColorTable(currentPal);
+			preview->imagePreview(QPixmap::fromImage(tim.image()), fileName, currentPal, tim.colorTableCount());
 		}
 		else
 		{
